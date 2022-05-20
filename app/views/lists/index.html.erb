@@ -3,7 +3,9 @@
 <ul class="list-unstyled m-3">
   <% @lists.each do |list| %>
     <li><%= link_to list.name, list_path(list), class: "btn btn-success my-3" %></li>
-    <li><%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %></li>
+    <% if list.photo.attached? %>
+      <li><%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %></li>
+    <% end %>
     <li><%= link_to "Add movie", new_list_bookmark_path(list), class: "btn btn-dark mb-5" %></li>
     <br>
   <% end %>
