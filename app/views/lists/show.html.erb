@@ -1,2 +1,16 @@
-<h1>Lists#show</h1>
-<p>Find me in app/views/lists/show.html.erb</p>
+<h5 class="m-5 bg-light p-3"><%= @list.name%></h5>
+
+<h1 class="m-5 bg-dark p-3 text-light"><strong>Bookmarks</strong></h1>
+<div class="container">
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="d-flex bg-light p-3">
+      <%= bookmark.movie.title %>
+      <%= bookmark.movie.overview %>
+      <%= tag.img src: bookmark.movie.poster_url, alt: bookmark.movie.title, style: 'height:250px;width:auto;' %>
+    </div>
+      <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger m-3" %>
+  <% end %>
+</div>
+
+  <br>
+<%= link_to "Back to lists", root_path, class: "btn btn-warning m-3" %>
