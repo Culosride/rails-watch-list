@@ -10,8 +10,8 @@
     </div>
       <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger m-3" %>
   <% end %>
-    <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
-</div>
-
+    <% if @list.photo.attached? %>
+      <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %></div>
   <br>
 <%= link_to "Back to lists", root_path, class: "btn btn-warning m-3" %>

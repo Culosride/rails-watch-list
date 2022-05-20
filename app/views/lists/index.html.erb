@@ -4,7 +4,7 @@
   <% @lists.each do |list| %>
     <li><%= link_to list.name, list_path(list), class: "btn btn-success my-3" %></li>
     <% if list.photo.attached? %>
-      <li><%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %></li>
+      <%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %>
     <% end %>
     <li><%= link_to "Add movie", new_list_bookmark_path(list), class: "btn btn-dark mb-5" %></li>
     <br>
