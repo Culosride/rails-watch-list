@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :select_list, only: %i[show]
+  before_action :select_list, only: %i[show destroy]
 
   def index
     @lists = List.all
@@ -18,6 +18,11 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     @list.save
     redirect_to root_path
+  end
+
+  def destroy
+    @list.destroy
+    redirect_to root_path, status: :see_other
   end
 
   private

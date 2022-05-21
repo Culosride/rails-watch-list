@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   end
   resources :bookmarks, only: %i[destroy]
+  delete 'lists/:id', to: 'lists#destroy', as: 'delete_list'
 
   # get 'lists/index'
   # get 'lists/new'

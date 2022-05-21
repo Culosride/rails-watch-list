@@ -1,17 +1,31 @@
-<h5 class="m-5 bg-light p-3"><%= @list.name%></h5>
+<nav class="navbar navbar-expand-lg sticky-top text-light bg-dark p-3">
+  <div class="container-fluid">
+    <h1 class="mx-3"><%= "#{@list.name} bookmarks" %></h1>
+    <%= link_to "Back to lists", root_path, class: "btn btn-dark m-3" %>
+    <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-dark m-3" %>
+      <% if @list.photo.attached? %>
+        <%= cl_image_tag @list.photo.key, height: 80, width: 80, crop: :thumb, radius: :max, class: "mx-5" %>
+      <% end %>
+  </div>
+</nav>
 
-<h1 class="m-5 bg-dark p-3 text-light"><strong>Bookmarks</strong></h1>
-<div class="container">
-  <% @list.bookmarks.each do |bookmark| %>
-    <div class="d-flex bg-light p-3">
-      <%= bookmark.movie.title %>
-      <%= bookmark.movie.overview %>
-      <%= tag.img src: bookmark.movie.poster_url, alt: bookmark.movie.title, style: 'height:250px;width:auto;' %>
-    </div>
+<div class="container-fluid p-6 mt-5">
+  <div class="container">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="d-flex bg-light p-3 justify-content-between">
+        <%= bookmark.movie.title %>
+        <%= bookmark.movie.overview %>
+        <%= tag.img src: bookmark.movie.poster_url, alt: bookmark.movie.title, style: 'height:250px;width:auto;' %>
+      </div>
       <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger m-3" %>
-  <% end %>
-    <% if @list.photo.attached? %>
-      <%= cl_image_tag @list.photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %></div>
-  <br>
-<%= link_to "Back to lists", root_path, class: "btn btn-warning m-3" %>
+    <% end %>
+  </div>
+</div>
+
+<br>
+<div class="footer">
+  <%= link_to "Add movie", new_list_bookmark_path(@list), class: "btn btn-dark m-3" %>
+  <%= link_to "Back to lists", root_path, class: "btn btn-warning m-3" %>
+  <%= link_to "Delete list", delete_list_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger m-3" %>
+
+</div>
